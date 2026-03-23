@@ -5,7 +5,6 @@ import { HowIApproach } from "@/components/how-i-approach";
 import { Skills } from "@/components/skills";
 import { Projects } from "@/components/projects";
 import { Experience } from "@/components/experience";
-import { GithubSection } from "@/components/github";
 import { Contact } from "@/components/contact";
 
 export default function Home() {
@@ -18,7 +17,6 @@ export default function Home() {
       <Skills />
       <Projects />
       <Experience />
-      <GithubSection />
       <Contact />
     </main>
   );

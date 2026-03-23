@@ -1,19 +1,55 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Send, Github, Linkedin, Twitter, Clock, Briefcase, FileText } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, Github, Linkedin, Twitter, Clock, Briefcase, FileText, CheckCircle2, AlertCircle } from "lucide-react";
 import { useState } from "react";
 
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
     setStatus("submitting");
-    // Simulate API call
-    setTimeout(() => {
-      setStatus("success");
-    }, 1500);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        throw new Error(data.error || "Failed to send");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   return (
@@ -24,10 +60,10 @@ export function Contact() {
 
       <div className="container relative z-10 mx-auto px-6 md:px-12 max-w-5xl">
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px" }}
-           className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tight mb-4">
             Let's Engineer Together
@@ -47,40 +83,40 @@ export function Contact() {
             className="flex flex-col justify-center order-2 md:order-1"
           >
             <h3 className="text-3xl font-heading font-black mb-8">Reach Out Directly</h3>
-            
+
             <div className="space-y-6 mb-10">
               <div className="flex items-center gap-4 text-foreground/80 bg-secondary/5 p-4 rounded-xl border border-secondary/10">
-                 <Briefcase className="text-primary shrink-0" size={24} />
-                 <div>
-                   <p className="font-bold">Open to Full Stack / Backend opportunities</p>
-                   <p className="text-sm font-medium opacity-70">Actively looking for impactful engineering roles.</p>
-                 </div>
+                <Briefcase className="text-primary shrink-0" size={24} />
+                <div>
+                  <p className="font-bold">Open to Full Stack / Backend opportunities</p>
+                  <p className="text-sm font-medium opacity-70">Actively looking for impactful engineering roles.</p>
+                </div>
               </div>
               <div className="flex items-center gap-4 text-foreground/80 bg-secondary/5 p-4 rounded-xl border border-secondary/10">
-                 <Clock className="text-accent shrink-0" size={24} />
-                 <div>
-                   <p className="font-bold">Fast Response Rate</p>
-                   <p className="text-sm font-medium opacity-70">Typically responds within 24 hours.</p>
-                 </div>
+                <Clock className="text-accent shrink-0" size={24} />
+                <div>
+                  <p className="font-bold">Fast Response Rate</p>
+                  <p className="text-sm font-medium opacity-70">Typically responds within 24 hours.</p>
+                </div>
               </div>
             </div>
-            
-            <a href="mailto:contact@jeetlohar.dev" className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent hover:opacity-80 transition-opacity mb-8 block w-fit border-b border-primary/30 pb-1">
-              contact@jeetlohar.dev
+
+            <a href="mailto:work.jeetloharcrj@gmail.com" className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent hover:opacity-80 transition-opacity mb-8 block w-fit border-b border-primary/30 pb-1">
+              work.jeetloharcrj@gmail.com
             </a>
 
             <div className="flex flex-wrap items-center gap-4">
-               <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-foreground text-background font-bold px-6 py-3 rounded-xl hover:scale-105 transition-transform">
-                  <FileText size={18} /> Download Resume
-               </a>
-               <div className="flex gap-3">
-                  <a href="#" className="p-3 rounded-xl border-2 border-secondary/20 hover:border-foreground transition-all duration-300">
-                    <Github size={20} />
-                  </a>
-                  <a href="#" className="p-3 rounded-xl border-2 border-secondary/20 hover:border-[#0077b5] hover:text-[#0077b5] transition-all duration-300">
-                    <Linkedin size={20} />
-                  </a>
-               </div>
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-foreground text-background font-bold px-6 py-3 rounded-xl hover:scale-105 transition-transform">
+                <FileText size={18} /> Download Resume
+              </a>
+              <div className="flex gap-3 text-foreground">
+                <a href="https://github.com/Jeet-Lohar-itzJeeSKUULL" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border-2 border-secondary/20 hover:border-foreground transition-all duration-300">
+                  <Github size={20} />
+                </a>
+                <a href="https://linkedin.com/in/jeetlohar" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl border-2 border-secondary/20 hover:border-[#0077b5] hover:text-[#0077b5] transition-all duration-300">
+                  <Linkedin size={20} />
+                </a>
+              </div>
             </div>
           </motion.div>
 
@@ -98,8 +134,10 @@ export function Contact() {
                 <input
                   type="text"
                   id="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   required
-                  className="w-full px-5 py-4 bg-background border border-secondary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 font-medium transition-shadow placeholder:opacity-40 text-lg"
+                  className="w-full px-5 py-4 bg-background border border-secondary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 font-medium transition-shadow placeholder:opacity-40 text-lg text-foreground"
                   placeholder="John Doe"
                 />
               </div>
@@ -108,8 +146,10 @@ export function Contact() {
                 <input
                   type="email"
                   id="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
-                  className="w-full px-5 py-4 bg-background border border-secondary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 font-medium transition-shadow placeholder:opacity-40 text-lg"
+                  className="w-full px-5 py-4 bg-background border border-secondary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 font-medium transition-shadow placeholder:opacity-40 text-lg text-foreground"
                   placeholder="john@example.com"
                 />
               </div>
@@ -117,9 +157,11 @@ export function Contact() {
                 <label htmlFor="message" className="block text-sm font-bold tracking-wide uppercase text-foreground/60 mb-2">Message</label>
                 <textarea
                   id="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                   rows={4}
-                  className="w-full px-5 py-4 bg-background border border-secondary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 font-medium transition-shadow resize-none placeholder:opacity-40 text-lg"
+                  className="w-full px-5 py-4 bg-background border border-secondary/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 font-medium transition-shadow resize-none placeholder:opacity-40 text-lg text-foreground"
                   placeholder="What's on your mind?"
                 />
               </div>
@@ -131,7 +173,31 @@ export function Contact() {
                 {status === "idle" && <><Send size={20} className="group-hover:translate-x-2 transition-transform" /> Send Message</>}
                 {status === "submitting" && "Transmitting..."}
                 {status === "success" && "Secured!"}
+                {status === "error" && "Error Encountered"}
               </button>
+
+              <AnimatePresence>
+                {status === "success" && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="text-emerald-500 font-bold text-center mt-2 flex items-center justify-center gap-2"
+                  >
+                    <CheckCircle2 size={18} /> Message sent successfully!
+                  </motion.p>
+                )}
+                {status === "error" && (
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="text-red-500 font-bold text-center mt-2 flex items-center justify-center gap-2"
+                  >
+                    <AlertCircle size={18} /> Failed to send message. Please try again.
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </form>
           </motion.div>
         </div>

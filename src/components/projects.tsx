@@ -7,13 +7,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, ArrowRight, Activity, TrendingUp } from "lucide-react";
 import { projectsData } from "@/data/projects";
 
-const filters = ["All", "Frontend", "Full Stack", "AI", "UI"];
+const filters = ["All", "Full Stack", "Data Science", "App Development", "Frontend"];
 
 export function Projects() {
   const [activeFilter, setActiveFilter] = useState("All");
 
   const filteredProjects = projectsData.filter(
-    (project) => activeFilter === "All" || project.category === activeFilter
+    (project) => activeFilter === "All" || project.categories.includes(activeFilter)
   );
 
   return (
@@ -34,15 +34,15 @@ export function Projects() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3 md:justify-end max-w-2xl ml-auto">
             {filters.map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                className={`px-6 py-2 rounded-full text-[13px] font-bold tracking-tight transition-all duration-300 ${
                   activeFilter === filter
-                    ? "bg-primary text-primary-foreground shadow-[0_0_10px_rgba(37,99,235,0.4)]"
-                    : "bg-secondary/10 hover:bg-secondary/20 text-foreground"
+                    ? "bg-primary text-primary-foreground shadow-[0_8px_16px_rgba(37,99,235,0.3)] ring-2 ring-primary/20"
+                    : "bg-secondary/5 hover:bg-secondary/15 text-foreground/70 hover:text-foreground border border-secondary/10"
                 }`}
               >
                 {filter}
@@ -95,9 +95,9 @@ export function Projects() {
 
                    <Link 
                      href={`/projects/${projectsData[1]?.id}`} 
-                     className="mt-auto inline-flex items-center justify-center w-fit px-8 py-4 bg-primary text-primary-foreground rounded-xl font-bold group/btn shadow-[0_10px_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_20px_rgba(37,99,235,0.5)] hover:bg-primary/90 hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 cursor-pointer outline-none"
+                     className="mt-auto inline-flex items-center justify-center w-fit px-8 py-4 bg-primary text-primary-foreground rounded-xl font-bold group/btn shadow-[0_10px_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:bg-primary/95 hover:scale-[1.05] active:scale-[0.97] transition-all duration-300 cursor-pointer outline-none"
                    >
-                     <span className="flex items-center gap-2">View Case Study <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" /></span>
+                     <span className="flex items-center gap-2 transition-transform duration-300 group-hover/btn:translate-x-1">View Project →</span>
                    </Link>
                 </div>
              </div>
@@ -116,7 +116,7 @@ export function Projects() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 key={project.id}
-                className="group relative bg-secondary/5 rounded-3xl overflow-hidden border border-secondary/10 hover:border-primary/50 transition-colors flex flex-col h-full shadow-lg"
+                className="group relative bg-secondary/5 rounded-3xl overflow-hidden border border-secondary/10 hover:border-primary/50 transition-all duration-300 flex flex-col h-full shadow-lg hover:shadow-[0_25px_50px_rgba(0,0,0,0.4)] hover:scale-[1.03] hover:-translate-y-2"
               >
                 <div className="relative aspect-video overflow-hidden bg-secondary/10 shrink-0">
                   {/* Fallback pattern */}
@@ -182,7 +182,7 @@ export function Projects() {
                   {/* 1. Project Tag */}
                   <div className="mb-4 flex flex-wrap gap-2">
                      <span className="text-xs font-bold px-3 py-1 bg-primary/10 text-primary rounded-full border border-primary/20 tracking-wide uppercase">
-                        {project.category}
+                        {project.categories.join(" • ")}
                      </span>
                   </div>
                   
@@ -213,13 +213,25 @@ export function Projects() {
                   
                   {/* 6. Tech Stack Tags */}
                   <div className="flex flex-wrap gap-2 mb-8">
-                    {project.techStack.slice(0, 4).map((tech) => (
-                       <span key={tech} className="text-[10px] font-bold uppercase tracking-wider text-foreground/60 bg-background border border-secondary/20 rounded px-2 py-1">
+                    {(() => {
+                      const priorityTags = ["Django", "React", "Python", "Firebase", "Next.js", "TypeScript", "Kotlin"];
+                      const sortedTags = [...project.techStack].sort((a, b) => {
+                        const aIdx = priorityTags.findIndex(p => a.toLowerCase().includes(p.toLowerCase()));
+                        const bIdx = priorityTags.findIndex(p => b.toLowerCase().includes(p.toLowerCase()));
+                        if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
+                        if (aIdx !== -1) return -1;
+                        if (bIdx !== -1) return 1;
+                        return 0;
+                      });
+
+                      return sortedTags.slice(0, 4).map((tech) => (
+                        <span key={tech} className="text-[10px] font-bold uppercase tracking-wider text-foreground/50 bg-secondary/5 border border-secondary/10 rounded px-2.5 py-1 transition-all group-hover:text-primary group-hover:border-primary/20">
                           {tech}
-                       </span>
-                    ))}
+                        </span>
+                      ));
+                    })()}
                     {project.techStack.length > 4 && (
-                       <span className="text-[10px] font-bold uppercase tracking-wider text-foreground/60 bg-background border border-secondary/20 rounded px-2 py-1">
+                       <span className="text-[10px] font-bold uppercase tracking-wider text-foreground/30 bg-transparent px-2 py-1">
                           +{project.techStack.length - 4}
                        </span>
                     )}
@@ -229,9 +241,9 @@ export function Projects() {
                   <div className="mt-auto pt-4 relative z-10">
                     <Link 
                       href={`/projects/${project.id}`} 
-                      className="flex items-center justify-center w-full py-3.5 bg-primary/10 hover:bg-primary/90 text-primary hover:text-primary-foreground border border-primary/20 hover:border-transparent rounded-xl font-bold group/btn shadow-sm hover:shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:scale-[1.03] active:scale-[0.97] transition-all duration-300 cursor-pointer outline-none"
+                      className="flex items-center justify-center w-full py-4 bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground border border-primary/30 hover:border-transparent rounded-xl font-bold group/btn shadow-sm hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer outline-none px-6"
                     >
-                      <span className="flex items-center gap-2">View Case Study <ArrowRight size={18} className="group-hover/btn:translate-x-1 transition-transform" /></span>
+                      <span className="flex items-center gap-2 transition-transform duration-300 group-hover/btn:translate-x-1 font-bold">View Project →</span>
                     </Link>
                   </div>
                 </div>

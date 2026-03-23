@@ -16,37 +16,41 @@ type TimelineItem = {
 const timelineData: TimelineItem[] = [
   {
     id: "exp-1",
-    title: "Full Stack Developer Intern",
-    company: "Tech Solutions Inc.",
-    date: "June 2025 - Present",
+    title: "Android App Development Trainee",
+    company: "Lovely Professional University",
+    date: "June 2025 – August 2025",
     description: [
-      "Built scalable scalable backend services capable of handling thousands of concurrent requests, improving overall system performance by 30%.",
-      "Optimized frontend React applications, raising Lighthouse scores from 65 to 95 through SSR and dynamic imports.",
-      "Collaborated in cross-functional agile teams to deploy high-impact features using CI/CD pipelines to AWS."
+      "Developed a modular Android application using Fragments and Bottom Navigation",
+      "Integrated Firebase Firestore, Cloudinary, and SQL for data and media handling",
+      "Built dynamic event listing, detailed views, and authentication system",
+      "Implemented role-based UI behavior for different users"
     ],
-    tech: ["React", "Node.js", "AWS", "Docker"],
+    tech: ["Kotlin", "Firebase", "Cloudinary", "SQL", "Android Studio"],
     type: "work",
   },
   {
     id: "exp-2",
-    title: "Freelance Systems Engineer",
-    company: "Self-Employed",
-    date: "Jan 2024 - May 2025",
+    title: "Full Stack & Data Science Projects",
+    company: "Academic & Personal Projects",
+    date: "2025 – Present",
     description: [
-      "Engineered performant Next.js e-commerce platforms and portfolios leading to a 40% increase in client conversions.",
-      "Integrated secure payment gateways (Stripe) and unified state management logic, drastically reducing transaction drop-off rates.",
+      "Built full-stack platforms using Django with role-based authentication and dashboards",
+      "Developed data analysis and machine learning projects using Python and scikit-learn",
+      "Created interactive dashboards using Power BI and Excel for data-driven insights",
+      "Worked on real-time and system-based applications across web and mobile"
     ],
-    tech: ["Next.js", "TypeScript", "Redux", "Stripe"],
+    tech: ["Python", "Django", "SQL", "Power BI", "Pandas", "scikit-learn"],
     type: "work",
   },
   {
     id: "edu-1",
-    title: "B.Tech in Computer Science",
-    company: "University of Technology",
-    date: "2022 - 2026",
+    title: "B.Tech in Computer Science and Engineering",
+    company: "Lovely Professional University",
+    date: "August 2023 – Present",
     description: [
-      "Specialized in Artificial Intelligence algorithms and scalable web engineering paradigms.",
-      "Won 1st place in Smart City Solutions 2024 Hackathon out of 150+ competing teams for engineering a real-time traffic prediction system.",
+      "Focused on Data Science, Full Stack Development, and App Development",
+      "Built multiple projects including ML models, dashboards, and full-stack systems",
+      "Strengthening problem-solving, system design, and software engineering fundamentals"
     ],
     type: "education",
   }
@@ -57,10 +61,10 @@ export function Experience() {
     <section id="experience" className="py-24 bg-background border-t border-secondary/10 relative overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 max-w-5xl relative z-10">
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px" }}
-           className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tighter mb-4">
             Professional Trajectory
@@ -83,9 +87,8 @@ export function Experience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative flex flex-col md:flex-row items-center mb-16 last:mb-0 ${
-                  isEven ? "md:flex-row-reverse" : ""
-                }`}
+                className={`relative flex flex-col md:flex-row items-center mb-16 last:mb-0 ${isEven ? "md:flex-row-reverse" : ""
+                  }`}
               >
                 {/* Timeline Node */}
                 <div className="absolute left-4 md:left-1/2 w-12 h-12 rounded-full bg-background border-[3px] border-primary transform -translate-x-1/2 flex items-center justify-center z-10 shadow-[0_0_15px_rgba(37,99,235,0.4)]">
@@ -104,7 +107,7 @@ export function Experience() {
                     </span>
                     <h3 className="text-2xl font-heading font-bold mb-1 group-hover:text-primary transition-colors">{item.title}</h3>
                     <h4 className="text-foreground/80 font-semibold mb-6 text-lg">{item.company}</h4>
-                    
+
                     <ul className={`text-foreground/70 text-sm space-y-3 mb-6 ${isEven ? "md:ml-auto" : ""} max-w-sm`}>
                       {item.description.map((desc, i) => (
                         <li key={i} className={`flex items-start ${isEven ? "md:justify-end" : "justify-start"}`}>
@@ -115,11 +118,11 @@ export function Experience() {
                     </ul>
 
                     {item.tech && (
-                       <div className={`flex flex-wrap gap-2 mt-auto ${isEven ? "md:justify-end" : "justify-start"}`}>
-                          {item.tech.map((t) => (
-                             <span key={t} className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-background border border-secondary/20 rounded-md text-foreground/60">{t}</span>
-                          ))}
-                       </div>
+                      <div className={`flex flex-wrap gap-2 mt-auto ${isEven ? "md:justify-end" : "justify-start"}`}>
+                        {item.tech.map((t) => (
+                          <span key={t} className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-background border border-secondary/20 rounded-md text-foreground/60">{t}</span>
+                        ))}
+                      </div>
                     )}
                   </div>
                 </div>

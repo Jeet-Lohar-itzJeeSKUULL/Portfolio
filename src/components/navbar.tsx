@@ -23,7 +23,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  
+
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export function Navbar() {
       // Section Highlight Logic
       const sections = NAV_LINKS.map(link => link.href.substring(1));
       let currentSection = sections[0];
-      
+
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element && window.scrollY >= element.offsetTop - 150) {
@@ -63,7 +63,7 @@ export function Navbar() {
       >
         <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
           <Link href="/#home" className="text-xl font-heading font-black tracking-wider">
-            Jeet<span className="text-primary">.</span>Lohar
+            Jeet<span className="text-primary">.</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -74,18 +74,18 @@ export function Navbar() {
                   <Link
                     href={`/${link.href}`}
                     className={cn(
-                       "relative text-sm font-bold transition-colors py-2",
-                       activeSection === link.href.substring(1) 
-                         ? "text-primary" 
-                         : "text-foreground/70 hover:text-foreground"
+                      "relative text-sm font-bold transition-colors py-2",
+                      activeSection === link.href.substring(1)
+                        ? "text-primary"
+                        : "text-foreground/70 hover:text-foreground"
                     )}
                   >
                     {link.name}
                     {activeSection === link.href.substring(1) && (
-                       <motion.div
-                          layoutId="activeSection"
-                          className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full shadow-[0_0_8px_rgba(37,99,235,0.8)]"
-                       />
+                      <motion.div
+                        layoutId="activeSection"
+                        className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full shadow-[0_0_8px_rgba(37,99,235,0.8)]"
+                      />
                     )}
                   </Link>
                 </li>
@@ -120,11 +120,11 @@ export function Navbar() {
         </div>
 
         {/* Scroll Progress Bar at the bottom edge of Navbar */}
-        <motion.div 
-           className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-accent to-primary origin-left" 
-           style={{ scaleX: scrollYProgress }} 
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-accent to-primary origin-left"
+          style={{ scaleX: scrollYProgress }}
         />
-        
+
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 w-full bg-background border-b border-border shadow-lg">
@@ -135,10 +135,10 @@ export function Navbar() {
                     href={`/${link.href}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                       "block text-lg font-bold transition-colors",
-                       activeSection === link.href.substring(1)
-                         ? "text-primary"
-                         : "text-foreground/80 hover:text-foreground"
+                      "block text-lg font-bold transition-colors",
+                      activeSection === link.href.substring(1)
+                        ? "text-primary"
+                        : "text-foreground/80 hover:text-foreground"
                     )}
                   >
                     {link.name}

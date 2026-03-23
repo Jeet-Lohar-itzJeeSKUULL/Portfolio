@@ -13,57 +13,66 @@ const topSkills = [
 const skillsData = [
   {
     category: "Languages",
-    description: "Core languages used to build efficient logic and scalable architectures.",
+    description: "Core programming languages used for problem-solving, backend development, and data processing.",
     items: [
-      { name: "TypeScript", usage: "Strict static typing for large codebases" },
-      { name: "JavaScript", usage: "Dynamic logic and rapid scripting" },
-      { name: "Python", usage: "Data analysis and heavy processing" },
-      { name: "Java", usage: "Robust enterprise architecture" },
-      { name: "SQL", usage: "Relational data structuring" }
+      { name: "C++", usage: "Procedural & high-performance logic" },
+      { name: "Java", usage: "Object-oriented backend systems" },
+      { name: "Python", usage: "Data science & backend development" },
+      { name: "Kotlin", usage: "Modern Android app development" },
+      { name: "SQL", usage: "Database querying and management" },
+      { name: "JavaScript", usage: "Interactive web logic" }
     ],
   },
   {
     category: "Frontend",
-    description: "Building responsive, high-performance interfaces using modern frameworks with a focus on user experience and rendering efficiency.",
+    description: "Building responsive and interactive user interfaces using modern web technologies.",
     items: [
-      { name: "React", usage: "Component-based UI architecture" },
-      { name: "Next.js", usage: "Server-side rendering & SEO" },
-      { name: "Tailwind CSS", usage: "Rapid utility-first styling" },
-      { name: "Framer Motion", usage: "Complex layout animations" },
-      { name: "Redux", usage: "Predictable state management" }
+      { name: "HTML", usage: "Semantic web structure" },
+      { name: "CSS", usage: "Modern layout and styling" },
+      { name: "JavaScript", usage: "DOM manipulation and events" },
+      { name: "React", usage: "Component-based web architecture" }
     ],
   },
   {
     category: "Backend",
-    description: "Designing scalable APIs and backend systems capable of handling real-world workloads and complex business logic.",
+    description: "Developing backend systems, APIs, and application logic for scalable web applications.",
     items: [
-      { name: "Node.js", usage: "Asynchronous runtime environments" },
-      { name: "Express", usage: "Lightweight robust API routing" },
-      { name: "Spring Boot", usage: "Enterprise-grade microservices" },
-      { name: "GraphQL", usage: "Precise, optimized data queries" },
-      { name: "REST APIs", usage: "Standardized system communication" }
+      { name: "Django", usage: "Rapid Python-driven web services" },
+      { name: "REST APIs", usage: "Seamless system communication" },
+      { name: "Firebase", usage: "Real-time sync and auth services" }
     ],
   },
   {
-    category: "Databases",
-    description: "Designing efficient schemas and optimizing queries for fast and reliable data access.",
+    category: "Data & Analytics",
+    description: "Working with data processing, visualization, and machine learning tools for insights and predictions.",
     items: [
-      { name: "PostgreSQL", usage: "Complex relational modeling" },
-      { name: "MongoDB", usage: "Flexible scaling document storage" },
-      { name: "MySQL", usage: "Structured transactional data" },
-      { name: "Redis", usage: "High-speed caching layers" }
+      { name: "Pandas", usage: "High-performance data manipulation" },
+      { name: "scikit-learn", usage: "Machine learning algorithms" },
+      { name: "Power BI", usage: "Business intelligence dashboards" },
+      { name: "Excel", usage: "Complex data modeling & formulas" },
+      { name: "ETL", usage: "Data extraction & transformation" },
+      { name: "Informatica IDQ", usage: "Enterprise data quality" },
+      { name: "MySQL Workbench", usage: "Visual database design" }
     ],
   },
   {
-    category: "Tools & DevOps",
-    description: "Streamlining development workflows, deployment, and system reliability using modern tools and cloud platforms.",
+    category: "Mobile Development",
+    description: "Building Android applications with modern architecture and cloud integrations.",
     items: [
-      { name: "Git", usage: "Version tracking & collaboration" },
-      { name: "Docker", usage: "Agnostic environment containerization" },
-      { name: "AWS", usage: "Cloud infrastructure scaling" },
-      { name: "Vercel", usage: "Seamless edge deployment" },
-      { name: "Linux", usage: "Server administration" },
-      { name: "CI/CD", usage: "Automated testing pipelines" }
+      { name: "Kotlin", usage: "Primary Android language" },
+      { name: "Android Studio", usage: "Professional Android IDE" },
+      { name: "Firebase", usage: "Cloud storage and messaging" },
+      { name: "Cloudinary", usage: "Media asset management" }
+    ],
+  },
+  {
+    category: "Tools & Development",
+    description: "Tools and technologies used for development, collaboration, and design.",
+    items: [
+      { name: "Git", usage: "Version tracking & history" },
+      { name: "GitHub", usage: "Collaborative code hosting" },
+      { name: "Figma", usage: "UI/UX interface design" },
+      { name: "Canva", usage: "Visual branding and assets" }
     ],
   },
 ];

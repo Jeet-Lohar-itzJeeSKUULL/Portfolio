@@ -8,7 +8,7 @@ import Image from "next/image";
 const ROLES = [
   "Full Stack Developer",
   "App Developer (Android & Web)",
-  "Data Science Enthusiast"
+  "Data Science Analyst"
 ];
 
 export function Hero() {
@@ -28,7 +28,7 @@ export function Hero() {
       if (text === "") {
         setIsDeleting(false);
         setRoleIndex((prev) => (prev + 1) % ROLES.length);
-        timer = setTimeout(() => {}, typingSpeed);
+        timer = setTimeout(() => { }, typingSpeed);
       } else {
         timer = setTimeout(() => setText(text.slice(0, -1)), deletingSpeed);
       }
