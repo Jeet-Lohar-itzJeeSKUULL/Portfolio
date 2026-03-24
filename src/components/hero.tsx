@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Mail } from "lucide-react";
 import Image from "next/image";
+import { GlowGrid } from "./glow-grid";
 
 const ROLES = [
   "Full Stack Developer",
@@ -48,39 +49,8 @@ export function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
     >
-      {/* Background gradients & Noise */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Subtle noise texture (3% opacity) */}
-        <div
-          className="absolute inset-0 opacity-[0.03] mix-blend-overlay pointer-events-none"
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
-        />
-
-        {/* Animated slow-moving deep blue/purple background glow (12s loop) */}
-        <motion.div
-          animate={{
-            opacity: [0.15, 0.25, 0.15],
-            scale: [1, 1.05, 1],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[-10%] left-[-10%] w-[70vw] h-[70vh] pointer-events-none mix-blend-screen blur-[120px] rounded-[100%]"
-          style={{
-            backgroundImage: "radial-gradient(circle at center, rgba(30,58,138,0.6) 0%, rgba(88,28,135,0.3) 40%, transparent 70%)"
-          }}
-        />
-
-        <motion.div
-          animate={{
-            opacity: [0.1, 0.2, 0.1],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-[-10%] right-[0%] w-[60vw] h-[60vh] pointer-events-none mix-blend-screen blur-[120px] rounded-[100%]"
-          style={{
-            backgroundImage: "radial-gradient(circle at center, rgba(88,28,135,0.4) 0%, rgba(30,58,138,0.2) 40%, transparent 70%)"
-          }}
-        />
-      </div>
+      {/* Modern Glowing Grid Background */}
+      <GlowGrid />
 
       <div className="container relative z-10 px-6 mx-auto mt-20 md:mt-0 flex flex-col-reverse md:flex-row items-center gap-12 md:gap-8">
         {/* Left Content */}
