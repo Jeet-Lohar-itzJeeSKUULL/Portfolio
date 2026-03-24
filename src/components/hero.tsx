@@ -152,7 +152,7 @@ export function Hero() {
             <div className="absolute inset-[-4px] bg-gradient-to-br from-primary via-transparent to-accent rounded-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500 blur-md" />
             <div className="absolute inset-0 rounded-xl bg-background m-[2px] overflow-hidden">
               <Image
-                src="/images/profile3.jpg"
+                src="/images/profile5.jpeg"
                 alt="Jeet Lohar"
                 fill
                 priority
